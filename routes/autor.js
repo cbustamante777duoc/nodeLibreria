@@ -3,8 +3,13 @@ const express = require("express");
 
 const ruta = express.Router();
 
-const { crearAutor } = require("../controllers/autor");
+const { crearAutor,getAutors,getAutorById } = require("../controllers/autor");
 
-ruta.route("/").post(crearAutor);
+ruta.route("/")
+        .post(crearAutor)
+        .get(getAutors)
+
+ruta.route("/:id")
+        .get(getAutorById)
 
 module.exports = ruta;
