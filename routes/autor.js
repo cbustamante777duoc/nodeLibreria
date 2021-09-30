@@ -3,7 +3,7 @@ const express = require("express");
 
 const ruta = express.Router();
 
-const { crearAutor,getAutors,getAutorById } = require("../controllers/autor");
+const { crearAutor,getAutors,getAutorById,deleteAutor,updateAutor } = require("../controllers/autor");
 
 ruta.route("/")
         .post(crearAutor)
@@ -11,5 +11,7 @@ ruta.route("/")
 
 ruta.route("/:id")
         .get(getAutorById)
+        .put(updateAutor)
+        .delete(deleteAutor)
 
 module.exports = ruta;

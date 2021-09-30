@@ -44,3 +44,47 @@ exports.getAutorById = async (req, res, next) => {
     res.status(400).json({ status: 400, mensaje: error });
   }
 };
+
+/**
+ * metodo que actualiza el autor y devuelve los datos del autor actualizado
+ * uso de mongoose findByIdAndUpdate
+ * req.params.id = id
+ * req.body = la data que devuelve
+ */
+exports.updateAutor = async (req, res, next) => {
+  try {
+    const autor = await Autor.findByIdAndUpdate(req.params.id, req.body)
+
+    if (!autor) {
+      return res.status(400).json({status: 400 })
+    }
+
+    //devuelve el autor actualizado
+    res.status(200).json({status:200, data:autor});
+
+  } catch (error) {
+    res.status(400).json({ status: 400, mensaje: error });
+  }
+};
+
+/**
+ * metodo que eliminar un autor y devuelve el estatus 200
+ * uso de mongoose meotodo findByIdAndDelete
+ * en caso de no encontrase manda el error 400
+ * 
+ */
+
+exports.deleteAutor = async (req, res, next) => {
+  try {
+    const autor = await Autor.findByIdAndDelete(req.params.id)
+
+    if (!autor) {
+      return res.status(400).json({status: 400 })
+    }
+
+    res.status(200).json({status:200});
+
+  } catch (error) {
+    res.status(400).json({ status: 400, mensaje: error });
+  }
+};
