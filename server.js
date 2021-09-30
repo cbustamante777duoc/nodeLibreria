@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const morgan = require("morgan");
+const errorHandler = require("./middleware/error");
 const connectDatabase = require("./config/db");
 
 dotenv.config({ path: "./config/config.env" });
@@ -23,6 +24,8 @@ if (process.env.NODE_ENV === "development") {
 //rutas que se van a usar
 app.use("/api/libro", libro);
 app.use("/api/LibreriaAutor", autor);
+
+app.use(errorHandler);
 
 //encaso que el valor sea indefinido utiliza el 5000
 const PORT = process.env.PORT || 5000;

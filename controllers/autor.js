@@ -41,7 +41,9 @@ exports.getAutorById = async (req, res, next) => {
 
     res.status(200).json(autor);
   } catch (error) {
-    res.status(400).json({ status: 400, mensaje: error });
+    next(error);
+    // res.status(400).json({ status: 400, mensaje: error });
+
   }
 };
 
