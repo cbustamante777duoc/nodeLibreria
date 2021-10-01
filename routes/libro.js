@@ -1,11 +1,11 @@
 const express = require("express");
 const ruta = express.Router();
 const {
-  getLibro,
   getLibros,
   crearLibro,
-  actualizarLibro,
-  eliminarLibro,
+  deleteLibro,
+  getLibroById,
+  updateLibro
 } = require("../controllers/libro");
 
 ruta
@@ -15,9 +15,9 @@ ruta
   
 ruta
    .route('/:id')
-   .get(getLibro)
-   .put(actualizarLibro)
-   .delete(eliminarLibro)
+   .get(getLibroById)
+   .put(updateLibro)
+   .delete(deleteLibro)
 
 
 
