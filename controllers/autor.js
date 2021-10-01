@@ -10,8 +10,9 @@ exports.crearAutor = async (req, res, next) => {
       data: autorData,
     });
   } catch (error) {
-    res.status(400).json({ status: 400, mensaje: error });
+    next(new ErrorResponse('Errores no es posible crear el autor '+error.message, 404));
   }
+
 };
 
 /**
@@ -25,7 +26,7 @@ exports.getAutors = async (req, res, next) => {
 
     res.status(200).json(autorLista);
   } catch (error) {
-    res.status(400).json({ status: 400, mensaje: error });
+    next(new ErrorResponse('No se puedo procesar el request '+error.message, 404));
   }
 };
 
@@ -64,14 +65,14 @@ exports.updateAutor = async (req, res, next) => {
     const autor = await Autor.findByIdAndUpdate(req.params.id, req.body)
 
     if (!autor) {
-      return res.status(400).json({status: 400 })
+      return next(new ErrorResponse('El autor no existe con este id '+req.params.id, 404));
     }
 
     //devuelve el autor actualizado
     res.status(200).json({status:200, data:autor});
 
   } catch (error) {
-    res.status(400).json({ status: 400, mensaje: error });
+    next(new ErrorResponse('El autor no existe con este id '+req.params.id, 404));
   }
 };
 
@@ -87,12 +88,12 @@ exports.deleteAutor = async (req, res, next) => {
     const autor = await Autor.findByIdAndDelete(req.params.id)
 
     if (!autor) {
-      return res.status(400).json({status: 400 })
+      return next(new ErrorResponse('El autor no existe con este id '+req.params.id, 404));
     }
 
     res.status(200).json({status:200});
 
   } catch (error) {
-    res.status(400).json({ status: 400, mensaje: error });
+    next(new ErrorResponse('El autor no existe con este id '+req.params.id, 404));
   }
 };
