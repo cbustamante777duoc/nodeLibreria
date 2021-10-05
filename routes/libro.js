@@ -5,7 +5,8 @@ const {
   crearLibro,
   deleteLibro,
   getLibroById,
-  updateLibro
+  updateLibro,
+  pagination
 } = require("../controllers/libro");
 
 ruta
@@ -19,6 +20,9 @@ ruta
    .put(updateLibro)
    .delete(deleteLibro)
 
+ruta
+  .route('/pagination')
+  .post(pagination);
 
 
 module.exports = ruta;
