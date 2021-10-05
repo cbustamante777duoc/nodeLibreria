@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const errorHandler = require("./middleware/error");
 const connectDatabase = require("./config/db");
 
@@ -15,6 +16,7 @@ const autor = require("./routes/autor");
 const app = express();
 //explico que de formato json al express
 app.use(express.json());
+app.use(cors());
 
 //uso de middleware (morgan) en modo desarrollo
 if (process.env.NODE_ENV === "development") {
